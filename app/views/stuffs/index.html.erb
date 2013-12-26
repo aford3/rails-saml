@@ -1,0 +1,35 @@
+<h1>Listing some stuff</h1>
+<br>
+<% if session[:attributes] != nil %>
+  Logged in as: "<%= session[:userid] %>" <br>
+   <br>With attributes: <br>
+     <% session[:attributes].each do |name, value| %>
+  <%= name %> = <%= value %><br>
+     <% end %>
+  <br>
+   <%= link_to 'Log Out', @settings.single_logout_service_url %>
+<% else %>
+  Not logged in.  <br><br>
+   <%= link_to 'Log In', '/saml' %>
+<% end %>
+<br>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stuffs.each do |stuff| %>
+  <tr>
+    <td><%= link_to 'Show', stuff %></td>
+    <td><%= link_to 'Edit', edit_stuff_path(stuff) %></td>
+    <td><%= link_to 'Destroy', stuff, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stuff', new_stuff_path %>
